@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f9f4ea">
+  <title>Панель ведущего — AI Avatar Workshop</title>
+  <link rel="stylesheet" href="/styles.css?v=beta-quota-v1">
+  <link rel="stylesheet" href="/admin-workshop.css?v=beta-quota-v1">
+</head>
+<body class="admin-page">
+  <main class="shell admin-shell">
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="AI Avatar Workshop"><img class="brand-logo" src="/workshop-mark.svg" alt=""><span>AVATAR<br>WORKSHOP</span></a>
+      <a class="header-note" href="/">Страница участника</a>
+    </header>
+    <div class="page-heading admin-heading">
+      <div><p class="program-kicker">Avatar Workshop:</p><h1 class="page-title admin-title">Панель ведущего</h1></div>
+      <p class="intro">Здесь можно проверить работы и скрыть то, что не подходит для галереи.</p>
+    </div>
+
+    <section class="panel admin-login" aria-labelledby="login-heading">
+      <div class="section-heading"><span class="section-number">01</span><h2 id="login-heading">Вход ведущего</h2></div>
+      <form id="admin-login" novalidate>
+        <label class="field-label" for="token">Код ведущего</label>
+        <div class="login-row"><input id="token" class="input" type="password" autocomplete="current-password" placeholder="Введите код"><button id="load" type="submit" disabled>Войти</button></div>
+        <p class="hint">Используйте код, который выдал организатор.</p>
+        <div id="msg" class="state" role="status" aria-live="polite">Введите код, чтобы открыть работы и статус занятия.</div>
+      </form>
+    </section>
+
+    <section id="status-panel" class="panel hidden" aria-labelledby="status-heading">
+      <div class="section-heading"><span class="section-number">02</span><h2 id="status-heading">Статус занятия</h2><button id="refresh" class="secondary" type="button" disabled>Обновить</button></div>
+      <p class="hint">Короткая сводка занятия. Данные обновляются автоматически каждые 7 секунд.</p>
+      <div id="status-grid" class="status-grid admin-summary-grid">
+        <article class="status-card" data-card="active"><span class="stat-label">Генерации сейчас</span><strong class="stat-value">—</strong><span class="hint">Идут в данный момент</span></article>
+        <article class="status-card" data-card="published"><span class="stat-label">Опубликованные работы</span><strong class="stat-value">—</strong><span class="hint">Видны в общей галерее</span></article>
+        <article class="status-card" data-card="hidden"><span class="stat-label">Скрытые работы</span><strong class="stat-value">—</strong><span class="hint">Не видны участникам</span></article>
+      </div>
+      <div id="status-note" class="state" role="status" aria-live="polite"></div>
+      <details class="admin-debug">
+        <summary>Техническая информация</summary>
+        <p class="admin-debug-note">Служебные данные для проверки связи и генерации. Провайдер показывает выбранную настройку; доступность внешнего API здесь не проверяется.</p>
+        <div class="status-grid admin-technical-grid">
+          <article class="status-card" data-card="backend"><span class="stat-label">Связь с backend</span><strong class="stat-value">Нет данных</strong><span class="hint">Ответ служебной проверки</span></article>
+          <article class="status-card" data-card="provider"><span class="stat-label">Выбранный AI-провайдер</span><strong class="stat-value">—</strong><span class="hint">Текущая настройка сервера</span></article>
+          <article class="status-card" data-card="average"><span class="stat-label">Среднее время генерации</span><strong class="stat-value">—</strong><span class="hint">По готовым аватарам</span></article>
+        </div>
+        <pre id="debug">Данные появятся после входа.</pre>
+      </details>
+    </section>
+
+    <section id="developer-panel" class="panel hidden" aria-labelledby="developer-heading">
+      <div class="section-heading"><h2 id="developer-heading">Режим разработчика</h2></div>
+      <p id="developerQuota" class="hint" role="status"></p>
+      <form id="developerForm">
+        <label id="developerPromptLabel" class="field-label" for="developerPrompt">Описание тестового аватара</label>
+        <textarea id="developerPrompt" rows="3" maxlength="500" required></textarea>
+        <div class="generate-actions">
+          <button id="developerGenerate" type="submit" disabled>Создать тестовый аватар</button>
+          <button id="developerReset" type="button" class="secondary" disabled>Новый герой</button>
+        </div>
+      </form>
+      <div id="developerState" class="state" role="status"></div>
+      <img id="developerImage" class="developer-image hidden" alt="Тестовый аватар разработчика">
+    </section>
+
+    <section id="works-panel" class="panel hidden admin-works-panel" aria-labelledby="works-heading">
+      <div class="section-heading"><span class="section-number">03</span><h2 id="works-heading">Работы</h2><span id="works-count" class="hint"></span></div>
+      <p class="hint">Описание героя доступно только вам — откройте «Подробнее». Скрытую работу можно вернуть в галерею.</p>
+      <div id="works-state" class="state" role="status" aria-live="polite"></div>
+      <div id="works" class="works-grid"><p class="empty-state">Работы появятся здесь автоматически.</p></div>
+    </section>
+  </main>
+  <script src="/admin.js?v=beta-quota-v1"></script>
+</body>
+</html>

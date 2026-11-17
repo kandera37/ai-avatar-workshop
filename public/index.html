@@ -1,0 +1,108 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f9f4ea">
+  <title>AI Avatar Workshop — мастерская</title>
+  <link rel="stylesheet" href="/styles.css?v=beta-quota-v1">
+</head>
+<body>
+<main class="shell">
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="AI Avatar Workshop"><img class="brand-logo" src="/workshop-mark.svg" alt=""><span>AVATAR<br>WORKSHOP</span></a>
+    <span class="header-note">01 · Идея / образ / версия</span>
+  </header>
+  <div class="page-heading">
+    <div><p class="program-kicker">Avatar Workshop:</p><h1 class="page-title">Твой герой.<br>Твоё воображение.</h1></div>
+    <p class="intro">От первой идеи до новой версии. Опиши характер, исследуй образ и собери свою галерею.</p>
+  </div>
+  <section id="login" class="entry panel" aria-labelledby="loginTitle">
+    <div class="entry-form">
+      <p class="eyebrow">01</p>
+      <h2 id="loginTitle">Как тебя подписать?</h2>
+      <p class="intro">Выбери вымышленный ник или номер. Он появится рядом с работой.</p>
+      <form id="loginForm">
+        <label class="field-label" for="nickname">Ник или номер</label>
+        <input id="nickname" minlength="2" maxlength="24" required autocomplete="off" placeholder="Например, Космо-07" aria-describedby="nicknameHint loginError">
+        <p id="nicknameHint" class="hint">2–24 буквы или цифры. Не вводи настоящее имя, телефон или адрес.</p>
+        <button id="start" type="submit" disabled>Начать</button>
+        <div id="loginError" class="error" role="alert"></div>
+      </form>
+    </div>
+    <div class="entry-art" aria-hidden="true">
+      <svg viewBox="0 0 440 320" class="lab-art" fill="none">
+<circle cx="220" cy="160" r="125" stroke="currentColor" opacity=".25"/>
+<path d="M55 160H385M220 30V290" stroke="currentColor" opacity=".2"/>
+<rect x="125" y="73" width="190" height="177" rx="68" fill="#fff8e8"/>
+<rect x="154" y="122" width="132" height="59" rx="28" fill="#153e4d"/>
+<circle cx="188" cy="151" r="11" fill="#59d2bc"/><circle cx="252" cy="151" r="11" fill="#59d2bc"/>
+<path d="M195 211Q220 227 245 211" stroke="#153e4d" stroke-width="6" stroke-linecap="round"/>
+<circle cx="95" cy="82" r="18" fill="#ffb45d"/><path d="M340 221l15 27 30 4-22 20 5 30-28-14-27 14 5-30-22-20 30-4Z" fill="#59d2bc"/>
+<path d="M68 250l26-26M81 263l26-26" stroke="#ffb45d" stroke-width="6" stroke-linecap="round"/>
+</svg>
+    </div>
+  </section>
+  <section id="workspace" class="hidden" aria-label="Мастерская">
+    <div class="participant-bar"><span><span class="tiny-label">Твой ник</span> <b id="who"></b></span><button id="newSession" type="button" class="link">Другой участник</button></div>
+    <nav class="workspace-nav" aria-label="Разделы мастерской">
+      <button id="showCreate" type="button" class="workspace-tab is-current" aria-current="page">Создать аватар</button>
+      <button id="showGallery" type="button" class="workspace-tab">Общая галерея</button>
+    </nav>
+    <section id="createSection" class="studio panel" aria-labelledby="createTitle">
+      <aside id="betaQuota" class="beta-quota" aria-labelledby="betaTitle">
+        <h3 id="betaTitle"><span>BETA</span> · Тестовая версия Avatar Workshop</h3>
+        <p>Сейчас доступно ограниченное количество бесплатных генераций. Лимит общий для всех участников.</p>
+        <p id="betaQuotaCount" class="beta-count" role="status">Проверяем остаток генераций…</p>
+        <progress id="betaQuotaProgress" max="1" aria-label="Остаток бесплатных генераций"></progress>
+      </aside>
+      <div class="editor">
+        <div class="section-heading"><span class="section-number">02</span><h2 id="createTitle">Опиши героя</h2></div>
+        <p id="promptModeHint" class="hint">Выбери идею для старта или напиши свою.</p>
+        <div class="themes" aria-label="Идеи для персонажа">
+          <button type="button" class="theme" data-prompt="дружелюбный робот-путешественник в космосе, яркий мультфильм">Робот</button>
+          <button type="button" class="theme" data-prompt="герой будущего в сияющем городе, яркий мультфильм">Герой будущего</button>
+          <button type="button" class="theme" data-prompt="волшебный космический дракон, добрый мультфильм">Фэнтези</button>
+          <button type="button" class="theme" data-prompt="исследователь далёкой планеты, красочный мультфильм">Космос</button>
+        </div>
+        <label id="promptLabel" class="field-label" for="prompt">Кто это?</label>
+        <textarea id="prompt" maxlength="500" rows="5" placeholder="Кто это? Как выглядит? Где находится? Например: добрый робот-садовник на зелёной планете, стиль мультфильма." aria-describedby="promptHint generationState genError"></textarea>
+        <p id="promptHint" class="hint">Добавь: кто это, как выглядит и где находится. Не пиши личные данные.</p>
+        <div class="generate-actions"><button id="generate" type="button" disabled>Создать аватар</button><span id="attemptLabel" class="tiny-label">Сделай первую версию</span></div>
+        <div id="generationState" class="state" aria-live="polite">Напиши описание героя.</div>
+        <div id="genError" class="error" role="alert"></div>
+      </div>
+      <div class="preview-panel">
+        <div class="preview-heading"><span class="eyebrow">Результат</span><span id="previewLabel" class="tiny-label">Здесь будет картинка</span></div>
+        <p id="mockNotice" class="hint mock-notice hidden">Тестовая картинка: сейчас тренируемся без ИИ. Описание пока не меняет героя.</p>
+        <div id="previewPlaceholder" class="preview-placeholder"><span class="placeholder-frame" aria-hidden="true">[ &nbsp;?&nbsp; ]</span><p>Здесь появится<br>твой персонаж</p></div>
+        <div id="generationProgress" class="generation-progress hidden" aria-live="polite">
+          <div class="generation-track" role="progressbar" aria-label="Оценка ожидания" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div id="generationProgressFill" class="generation-progress-fill"></div>
+            <span class="generation-bot" aria-hidden="true"><span class="generation-bot-eye"></span></span>
+          </div>
+          <div class="generation-progress-meta"><strong id="generationProgressPercent">0%</strong><span id="generationProgressCopy">Собираем образ</span></div>
+          <p class="hint generation-progress-note">Можно пока придумать, что добавить в следующую версию.</p>
+        </div>
+        <div id="result" class="result hidden">
+          <img id="avatar" alt="Твой сгенерированный аватар">
+          <div class="result-actions"><button id="publish" type="button">Опубликовать</button><button id="newHero" type="button" class="link-button">Создать нового героя</button></div>
+          <div id="workState" class="state" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+    <section id="gallerySection" class="gallery-section" aria-labelledby="galleryTitle">
+      <div class="gallery-heading">
+        <div><div class="section-heading"><span class="section-number">03</span><h2 id="galleryTitle">Общая галерея</h2><span id="galleryCount" class="gallery-count">0</span></div><p class="hint">Здесь появляются работы группы. Поставь лайк тем, что тебе нравятся.</p></div>
+      </div>
+      <div id="gallery" class="gallery"></div>
+      <div id="galleryEmpty" class="empty-state" aria-live="polite">Здесь пока пусто. Создай героя и опубликуй его.</div>
+      <div id="galleryMessage" class="state" aria-live="polite"></div>
+      <p id="gallerySync" class="hint" role="status">Работы и лайки обновляются автоматически.</p>
+    </section>
+  </section>
+  <footer class="site-footer"><span>Нужна помощь? Позови ведущего.</span></footer>
+</main>
+<script src="/app.js?v=beta-quota-v1" defer></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+/* Facilitator view: keep the operational summary quiet and put attention on work previews. */
+.admin-summary-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 18px;
+}
+
+.admin-summary-grid .status-card {
+  border-right: 1px solid var(--line);
+  border-bottom: 0;
+}
+
+.admin-summary-grid .status-card:last-child { border-right: 0; }
+
+.admin-technical-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 12px 0 16px;
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+.admin-debug {
+  margin-top: 18px;
+  border-top: 1px solid var(--line);
+  padding-top: 6px;
+}
+
+.admin-debug summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.admin-debug-note {
+  max-width: 760px;
+  margin: 4px 0 12px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.admin-works-panel {
+  border-color: #d5c8b7;
+  box-shadow: 0 3px 0 rgba(45, 35, 96, .1);
+}
+
+.admin-works-panel .section-heading h2 { font-size: 32px; }
+
+.admin-works-panel .works-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.admin-works-panel .admin-work {
+  border-radius: 12px;
+  border-color: #d8cbbb;
+  box-shadow: 0 2px 0 rgba(45, 35, 96, .06);
+}
+
+.admin-works-panel .work-image {
+  aspect-ratio: 1;
+  background: #eee8de;
+}
+
+.admin-works-panel .work-body { padding: 14px; }
+
+.admin-works-panel .work-heading h3 { font-size: 16px; }
+
+.admin-works-panel .work-facts {
+  display: grid;
+  gap: 2px;
+  margin: 10px 0;
+  font-size: 12px;
+}
+
+.admin-works-panel .work-actions { gap: 6px; }
+
+.admin-works-panel .work-actions button {
+  min-height: 40px;
+  font-size: 12px;
+}
+
+@media (max-width: 1050px) {
+  .admin-works-panel .works-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 650px) {
+  .admin-summary-grid,
+  .admin-technical-grid { grid-template-columns: 1fr; }
+  .admin-summary-grid .status-card,
+  .admin-technical-grid .status-card {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .admin-summary-grid .status-card:last-child,
+  .admin-technical-grid .status-card:last-child { border-bottom: 0; }
+  .admin-works-panel .works-grid { grid-template-columns: 1fr; }
+  .admin-works-panel .section-heading h2 { font-size: 28px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-works-panel .admin-work { transition: none; }
+}
+.developer-image { display: block; width: min(100%, 260px); height: auto; margin-top: 12px; border: 1px solid var(--line); border-radius: 12px; }
