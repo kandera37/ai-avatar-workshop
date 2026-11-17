@@ -8,6 +8,7 @@
 - `npm run test:ui`: полный сценарий Playwright, **14 локальных mock-вызовов**, без внешнего image API.
 - Синтаксис: server.js, ai-adapter.js, db.js, src/*.js, public/*.js, scripts/*.js и tests/*.js.
 - `npm run check:public`: проверка состава и текстовых шаблонов секретов. Дополнительно перед публикацией проверены исключённые идентификаторы, изображения и чистая история Git.
+- GitHub Actions: [успешный запуск на Ubuntu / Node.js 24](https://github.com/kandera37/ai-avatar-workshop/actions/runs/44044377866).
 
 ### Что проверяет Node test runner
 
